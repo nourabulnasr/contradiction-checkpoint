@@ -1,0 +1,8 @@
+# The demo (demo.py) and the default HeuristicJudge need NOTHING from this
+# file — they run on the Python 3.10+ standard library only.
+#
+# Install this only if you want the real AnthropicJudge (requires
+# ANTHROPIC_API_KEY, see .env.example):
+#
+#   pip install -r requirements.txt
+anthropic>=0.40.0
