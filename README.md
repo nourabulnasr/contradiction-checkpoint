@@ -48,6 +48,16 @@ handed `{plan, last N turns, proposed action}` and returns `ALLOW` or `HALT`.
 On `HALT`, the wrapped function is **never called** — `ContradictionHalt` is
 raised instead, with the judge's reasoning attached.
 
+For an `async def` function, the check runs when its guarded coroutine starts,
+using the history available then. Creating a coroutine object does not authorize
+future execution. Only a `CheckResult` containing the actual `Verdict.ALLOW`
+enum permits execution; malformed results are logged as `HALT`. Custom judges
+must return the declared enum rather than a plain string.
+
+This is an entry check, not continuous authorization across later `await`
+points inside a running tool. Generators, async generators and callable objects
+that return deferred work require separate interception of their execution.
+
 Two judges ship in the box:
 
 | Judge | Dependencies | API key | What it does |
